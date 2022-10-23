@@ -78,3 +78,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# Viikko 2 [https://github.com/mluukkai/WebPalvelinohjelmointi2022/blob/main/web/viikko2.md#debuggeri]
+group :development, :test do
+  gem "pry-byebug"
+end
