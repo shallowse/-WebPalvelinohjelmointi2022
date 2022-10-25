@@ -1,0 +1,33 @@
+class JoinclubsController < ApplicationController
+  # TODO: only signed in users can join a club
+
+  def new
+    beer_clubs = BeerClub.all
+    user = User.find(session[:user_id])
+
+    @available_clubs = []
+    # for club in beer_clubs do
+    #  @available_clubs << club if not club.users.include? user
+    # end
+    beer_clubs.each do |club|
+      @available_clubs << club if !club.users.include? user
+    end
+  end
+
+  def create
+    user = User.find(session[:user_id])
+    beer_club = BeerClub.find(params[:beer_club_id])
+
+    # check if user is already a member of beer_club
+    is_member = false
+    for club in user.beer_clubs
+      is_member = true if club == beer_club
+
+      break if is_member
+     end
+
+    beer_club.users << user unless is_member
+
+    redirect_to user_path(user.id)
+  end
+end

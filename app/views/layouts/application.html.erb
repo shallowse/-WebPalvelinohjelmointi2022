@@ -21,7 +21,7 @@
       <% if current_user %>
         <%= link_to current_user.username, user_path(current_user.id) %>
         <%= link_to 'Rate a new beer', new_rating_path %>
-        <%= link_to 'Join a club', new_beer_club_path %>
+        <%= link_to 'Join a club', joinclub_path %>
         <%= link_to 'Sign out', signout_path,
                                 data: {
                                   'turbo_method': :delete
