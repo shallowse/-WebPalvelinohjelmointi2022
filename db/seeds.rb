@@ -17,9 +17,11 @@ b2.beers.create name: "X Porter", style: "Porter"
 b3.beers.create name: "Hefeweizen", style: "Weizen"
 b3.beers.create name: "Helles", style: "Lager"
 
+# Create users
 u1 = User.create username: "john"
 u2 = User.create username: "sarah"
 
+# Create ratings
 u1_r1 = Rating.create score: 1, beer_id: b1.beers.first.id, user_id: u1.id
 u1_r1 = Rating.create score: 2, beer_id: b1.beers.second.id,  user_id: u1.id
 
@@ -31,3 +33,15 @@ u1_r3 = Rating.create score: 6, beer_id: b3.beers.second.id,  user_id: u1.id
 
 u2_r1 = Rating.create score: 7, beer_id: b1.beers.first.id, user_id: u2.id
 u2_r2 = Rating.create score: 8, beer_id: b1.beers.second.id, user_id: u2.id
+
+# Create beer clubs and add members
+bc1 = BeerClub.new name: 'Kumpulan kaljakerho', founded: 2022, city: 'Helsinki'
+bc1.users << u1
+bc1.save
+
+bc1.users << u2
+bc1.save
+
+bc2 = BeerClub.create name: 'Old pub', founded: 1922, city: 'Turku'
+bc2.users << u2
+bc2.save

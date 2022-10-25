@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
+  resources :beer_clubs, path: :beerclubs
+
   # get "kaikki_bisset", to: "beers#index"
 
   get 'signup', to: 'users#new'
