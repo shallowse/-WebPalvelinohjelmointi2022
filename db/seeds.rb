@@ -16,3 +16,18 @@ b2.beers.create name: "Huvila Pale Ale", style: "Pale Ale"
 b2.beers.create name: "X Porter", style: "Porter"
 b3.beers.create name: "Hefeweizen", style: "Weizen"
 b3.beers.create name: "Helles", style: "Lager"
+
+u1 = User.create username: "john"
+u2 = User.create username: "sarah"
+
+u1_r1 = Rating.create score: 1, beer_id: b1.beers.first.id, user_id: u1.id
+u1_r1 = Rating.create score: 2, beer_id: b1.beers.second.id,  user_id: u1.id
+
+u1_r2 = Rating.create score: 3, beer_id: b2.beers.first.id,  user_id: u1.id
+u1_r2 = Rating.create score: 4, beer_id: b2.beers.second.id,  user_id: u1.id
+
+u1_r3 = Rating.create score: 5, beer_id: b3.beers.first.id,  user_id: u1.id
+u1_r3 = Rating.create score: 6, beer_id: b3.beers.second.id,  user_id: u1.id
+
+u2_r1 = Rating.create score: 7, beer_id: b1.beers.first.id, user_id: u2.id
+u2_r2 = Rating.create score: 8, beer_id: b1.beers.second.id, user_id: u2.id
