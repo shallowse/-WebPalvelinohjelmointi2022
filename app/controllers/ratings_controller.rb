@@ -11,7 +11,8 @@ class RatingsController < ApplicationController
   def create
     # binding.pry
     rating = Rating.create params.require(:rating).permit(:score, :beer_id)
-    session[:last_rating] = "#{rating.beer.name} #{rating.score} points"
+    rating.user = current_user
+    rating.save
     redirect_to ratings_path
   end
 
