@@ -22,17 +22,13 @@
         <%= link_to 'Rate a new beer', new_rating_path %>
         <%= link_to 'Sign out', signout_path,
                                 data: {
-                                  'turbo-method': :delete
+                                  'turbo_method': :delete
                                 } %>
       <% else %>
         <%= link_to 'Sign up', new_user_path %>
         <%= link_to 'Sign In', signin_path %>
       <% end %>
     </div>
-
-      <% if current_user %>
-        <p><%= current_user.username %> signed in</p>
-      <% end %>
 
       <%= yield %>
 
