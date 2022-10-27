@@ -19,13 +19,13 @@ b3.beers.create name: "Helles", style: "Lager"
 
 # Create users
 u1 = User.new username: 'john'
-u1.password = 'john'
-u1.password_confirmation = 'john'
+u1.password = 'JOHN1'
+u1.password_confirmation = 'JOHN1'
 u1.save
 
 u2 = User.new username: 'sarah'
-u2.password = 'sarah'
-u2.password_confirmation = 'sarah'
+u2.password = 'SARAH1'
+u2.password_confirmation = 'SARAH1'
 u2.save
 
 # Create ratings
