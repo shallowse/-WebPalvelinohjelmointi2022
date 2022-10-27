@@ -10,7 +10,7 @@ class JoinclubsController < ApplicationController
     #  @available_clubs << club if not club.users.include? user
     # end
     beer_clubs.each do |club|
-      @available_clubs << club if !club.users.include? user
+      @available_clubs << club if !club.members.include? user
     end
   end
 
@@ -31,7 +31,7 @@ class JoinclubsController < ApplicationController
       break if is_member
     end
 
-    beer_club.users << user unless is_member
+    beer_club.members << user unless is_member
 
     redirect_to user_path(user.id)
   end
