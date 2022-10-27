@@ -42,6 +42,13 @@
     <% end %>
   </ul>
 
+  <h3>favorite <%= @user.favorite_brewery.count == 1 ? "brewery" : "breweries" %></h3>
+  <ul>
+    <% @user.favorite_brewery.each do |favorite| %>
+      <li><%= favorite.name %></li>
+    <% end %>
+  </ul>
+
 </div>
 
 <div>

@@ -94,6 +94,16 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "favorite brewerie" do
+    let(:user) { FactoryBot.create(:user) }
+
+    it "has method for detemining one" do
+      beer = create_beer_with_rating({ user: user }, 10)
+
+      expect(user.favorite_brewery.first.name).to eq("anonymous")
+    end
+  end
+
   def create_beer_with_rating_style(object, score, style)
     beer = FactoryBot.create(:beer, style: style)
     FactoryBot.create(:rating, beer: beer, score: score, user: object[:user])
@@ -111,5 +121,7 @@ RSpec.describe User, type: :model do
       create_beer_with_rating(object, score)
     end
   end
+
+  
 
 end
