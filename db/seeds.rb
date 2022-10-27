@@ -18,8 +18,15 @@ b3.beers.create name: "Hefeweizen", style: "Weizen"
 b3.beers.create name: "Helles", style: "Lager"
 
 # Create users
-u1 = User.create username: "john"
-u2 = User.create username: "sarah"
+u1 = User.new username: 'john'
+u1.password = 'john'
+u1.password_confirmation = 'john'
+u1.save
+
+u2 = User.new username: 'sarah'
+u2.password = 'sarah'
+u2.password_confirmation = 'sarah'
+u2.save
 
 # Create ratings
 u1_r1 = Rating.create score: 1, beer_id: b1.beers.first.id, user_id: u1.id
