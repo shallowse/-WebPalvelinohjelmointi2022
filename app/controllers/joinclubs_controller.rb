@@ -20,11 +20,16 @@ class JoinclubsController < ApplicationController
 
     # check if user is already a member of beer_club
     is_member = false
-    for club in user.beer_clubs
+    # for club in user.beer_clubs
+    #  is_member = true if club == beer_club
+    #
+    #  break if is_member
+    # end
+    user.beer_clubs.each do |club|
       is_member = true if club == beer_club
 
       break if is_member
-     end
+    end
 
     beer_club.users << user unless is_member
 
