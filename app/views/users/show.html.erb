@@ -35,6 +35,13 @@
     <% end %>
   </ul>
 
+  <h3>favorite style<%= "s" if @user.favorite_style.count > 1 %></h3>
+  <ul>
+    <% @user.favorite_style.each do |favorite| %>
+      <li><%= favorite %></li>
+    <% end %>
+  </ul>
+
 </div>
 
 <div>
