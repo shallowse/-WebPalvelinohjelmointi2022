@@ -18,15 +18,8 @@ b3.beers.create name: "Hefeweizen", style: "Weizen"
 b3.beers.create name: "Helles", style: "Lager"
 
 # Create users
-u1 = User.new username: 'john'
-u1.password = 'JOHN1'
-u1.password_confirmation = 'JOHN1'
-u1.save
-
-u2 = User.new username: 'sarah'
-u2.password = 'SARAH1'
-u2.password_confirmation = 'SARAH1'
-u2.save
+u1 = User.create username: 'john', password: 'JOHN1', password_confirmation: 'JOHN1'
+u2 = User.create username: 'sarah', password:  'SARAH1', password_confirmation: 'SARAH1'
 
 # Create ratings
 u1_r1 = Rating.create score: 1, beer_id: b1.beers.first.id, user_id: u1.id
@@ -43,12 +36,12 @@ u2_r2 = Rating.create score: 8, beer_id: b1.beers.second.id, user_id: u2.id
 
 # Create beer clubs and add members
 bc1 = BeerClub.new name: 'Kumpulan kaljakerho', founded: 2022, city: 'Helsinki'
-bc1.users << u1
+bc1.members << u1
 bc1.save
 
-bc1.users << u2
+bc1.members << u2
 bc1.save
 
 bc2 = BeerClub.create name: 'Old pub', founded: 1922, city: 'Turku'
-bc2.users << u2
+bc2.members << u2
 bc2.save
