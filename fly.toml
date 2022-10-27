@@ -1,4 +1,4 @@
-# fly.toml file generated for ratebeer-mooc-2022 on 2022-10-27T20:51:16+03:00
+# fly.toml file generated for ratebeer-mooc-2022 on 2022-10-27T21:20:18+03:00
 
 app = "ratebeer-mooc-2022"
 kill_signal = "SIGINT"
