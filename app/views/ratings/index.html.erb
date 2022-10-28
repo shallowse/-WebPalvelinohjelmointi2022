@@ -1,5 +1,6 @@
 <h2>List of ratings</h2>
 
+<h4><%= pluralize(@ratings.count, 'rating') %></h4>
 <ul>
   <% @ratings.each do |rating| %>
     <li>
