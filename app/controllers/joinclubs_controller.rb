@@ -1,5 +1,5 @@
 class JoinclubsController < ApplicationController
-  # TODO: only signed in users can join a club
+  before_action :ensure_that_signed_in
 
   def new
     beer_clubs = BeerClub.all
