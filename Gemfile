@@ -86,3 +86,5 @@ end
 group :development, :test do
   gem "pry-byebug"
 end
+
+gem "simplecov", require: false
