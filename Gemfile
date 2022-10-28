@@ -74,17 +74,15 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "rspec-rails", "~> 6.0.0"
+  gem "factory_bot_rails"
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "launchy"
 end
 
 # Viikko 2 [https://github.com/mluukkai/WebPalvelinohjelmointi2022/blob/main/web/viikko2.md#debuggeri]
 group :development, :test do
   gem "pry-byebug"
-end
-
-group :test do
-  gem "rspec-rails", "~> 6.0.0"
-  gem "factory_bot_rails"
 end
