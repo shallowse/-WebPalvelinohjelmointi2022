@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get 'joinclub', to: 'joinclubs#new'
   post 'joinclub', to: 'joinclubs#create'
+  delete 'leaveclub', to: 'joinclubs#leave'
 
   get 'signup', to: 'users#new'
 

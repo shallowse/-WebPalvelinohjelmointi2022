@@ -3,16 +3,24 @@
 <%= render @beer_club %>
 
 <% if current_user %>
+
   <% if !@is_member %>
     <h4>join this club</h4>
     <%= form_with url: joinclub_path, method: :post do |form| %>
       <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
       <%= form.submit 'Join the beer club' %>
     <% end %>
+
+  <% else %>
+    <%= form_with url: leaveclub_path, method: :delete do |form| %>
+      <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.submit 'End the membership' %>
+
+    <% end %>
   <% end %>
 
   <br>
   <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club) %>
-
   <%= button_to("Destroy this beer club", @beer_club, method: :delete) if current_user %>
 <% end %>

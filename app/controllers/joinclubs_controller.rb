@@ -36,4 +36,17 @@ class JoinclubsController < ApplicationController
     # redirect_to user_path(user.id)
     redirect_to beer_club_path(beer_club), notice: "#{user.username} Welcome to the club."
   end
+
+  def leave
+    # binding.pry
+    m = current_user.memberships.find_by(beer_club_id: params[:beer_club_id])
+
+    name = m.beer_club.name
+    m.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user), notice: "Membership in #{name} ended." }
+      format.json { head :no_content }
+    end
+  end
 end
