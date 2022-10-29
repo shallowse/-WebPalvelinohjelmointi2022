@@ -9,13 +9,21 @@ b1 = Brewery.create name: "Koff", year: 1897
 b2 = Brewery.create name: "Malmgard", year: 2001
 b3 = Brewery.create name: "Weihenstephaner", year: 1040
 
-b1.beers.create name: "Iso 3", style: "Lager"
-b1.beers.create name: "Karhu", style: "Lager"
-b1.beers.create name: "Tuplahumala", style: "Lager"
-b2.beers.create name: "Huvila Pale Ale", style: "Pale Ale"
-b2.beers.create name: "X Porter", style: "Porter"
-b3.beers.create name: "Hefeweizen", style: "Weizen"
-b3.beers.create name: "Helles", style: "Lager"
+# styles from: https://www.beeradvocate.com/beer/styles/
+Style.create name: 'European Dark Lager', description: 'This style encompasses a wide range of dark beers including India Pale Lagers, Czech lagers, and lagers brewed with adjuncts or non-traditional ingredients. In time these entries will be moved into more accurate categories.'
+Style.create name: 'Cream Ale', description: 'Cream Ales, spawned from the American light lager style, are brewed as an ale though are sometimes finished with a lager yeast or with lager beer mixed into the final product. Adjuncts such as corn or rice are frequently used to lighten the body but it is not uncommon for smaller craft brewers to make all malt Cream Ales. Pale straw to pale gold in color, they were known to have a low degree of hop bittering yet some hop aroma. More recently, a number of breweries have put their stamp on the style by giving it more of a hoppy character, nudging it toward Imperial. Well carbonated and well attenuated.'
+Style.create name: 'American Pale Ale', description: 'Originally British in origin, this style is now popular worldwide and the use of local or imported ingredients produces variances in character from region to region. American versions tend to be cleaner and hoppier (with the piney, citrusy Cascade variety appearing frequently) than British versions, which are usually more malty, buttery, aromatic, and balanced. Pale Ales range in color from deep gold to medium amber. Fruity esters and diacetyl can vary from none to moderate, and hop aroma can range from lightly floral to bold and pungent. In general, expect a good balance of caramel malt and expressive hops with a medium body and a mildly bitter finish. '
+Style.create name: 'Berliner Weisse', description: 'Low in alcohol, refreshingly tart, and often served with a flavored syrup like Woodruff or raspberry, the Berliner-style Weisse presents a harmony between yeast and lactic acid. These beers are very pale in color, and may be cloudy as they are often unfiltered. Hops are not a feature of this style, but these beers often do showcase esters. Traditional versions often showcase Brettanomyces yeast. Growing in popularity in the U.S., where many brewers are now adding traditional and exotic fruits to the recipe, resulting in flavorful finishes with striking, colorful hues. These beers are incredible when pairing. Bitterness, alcohol and residual sugar are very low, allowing the beer’s acidity, white bread and graham cracker malt flavors to shine. Carbonation is very high, adding to the refreshment factor this style delivers. Many examples of this style contain no hops and thus no bitterness at all.'
+Style.create name: 'Baltic Porter', description: 'Porters of the late 1700\'s were quite strong compared to today\'s standards, easily surpassing 7 percent alcohol by volume. Some English brewers made a stronger, more robust version, to be shipped across the North Sea that they dubbed a Baltic Porter. In general, the style\'s dark brown color covered up cloudiness and the smoky, roasted brown malts and bitter tastes masked brewing imperfections. Historically, the addition of stale ale also lent a pleasant acidic flavor to the style, which made it quite popular. These issues were quite important given that most breweries at the time were getting away from pub brewing and opening up production facilities that could ship beer across the world.'
+Style.create name: 'Sahti', description: 'A farmhouse ale with roots in Finland, Sahti was first brewed by peasants in the 1500s. Turbid with tremendous body, a low-flocculating Finnish bakers yeast creates a cloudy unfiltered beer with an abundance of sediment. Its color usually falls somewhere between pale yellow and deep brown. Traditionally unhopped, juniper twigs used during the brewing process create balance, imparting an unusual resiny character and serving as a preservative. Meanwhile, exposure to wild yeast and bacteria gives Sahti its signature tartness.'
+
+b1.beers.create name: "Iso 3", style_id: 1
+b1.beers.create name: "Karhu", style_id: 2
+b1.beers.create name: "Tuplahumala", style_id: 3
+b2.beers.create name: "Huvila Pale Ale", style_id: 4
+b2.beers.create name: "X Porter", style_id: 5
+b3.beers.create name: "Hefeweizen", style_id: 6
+b3.beers.create name: "Helles", style_id: 1
 
 # Create users
 u1 = User.create username: 'john', password: 'JOHN1', password_confirmation: 'JOHN1'

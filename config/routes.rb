@@ -32,4 +32,6 @@ Rails.application.routes.draw do
 
   resources :places, only: %i[index show]
   post 'places', to: 'places#search'
+
+  resources :styles
 end
