@@ -5,6 +5,6 @@ class Style < ApplicationRecord
   validates :description, presence: true
 
   def to_s
-    "#{name}"
+    name.to_s
   end
 end

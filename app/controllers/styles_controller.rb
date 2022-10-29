@@ -59,13 +59,14 @@ class StylesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_style
-      @style = Style.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def style_params
-      params.require(:style).permit(:name, :description, :beer_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_style
+    @style = Style.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def style_params
+    params.require(:style).permit(:name, :description, :beer_id)
+  end
 end

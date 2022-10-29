@@ -15,7 +15,7 @@ class WeathermappingApi
 
     response = HTTParty.get "#{url}#{ERB::Util.url_encode(city)}"
 
-    return [] if response['success'] == false 
+    return [] if response['success'] == false
 
     Weather.new(response['current'])
   end
