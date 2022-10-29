@@ -29,4 +29,6 @@ Rails.application.routes.draw do
 
   # get "kaikki_bisset", to: "beers#index"
 
+  get 'places', to: 'places#index'
+  post 'places', to: 'places#search'
 end
