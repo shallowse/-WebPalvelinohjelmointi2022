@@ -39,9 +39,15 @@ describe "User" do
   describe "when on user's page (signed up)" do 
     before :each do
       brewery = FactoryBot.create :brewery, name: 'Koff' 
-      beer1 = FactoryBot.create :beer, name: 'iso 3', style: 'Lager', brewery: brewery 
-      beer2 = FactoryBot.create :beer, name: 'Karhu', style: 'IPA', brewery: brewery 
-      beer3 = FactoryBot.create :beer, name: 'iso 4', style: 'RandNew', brewery: brewery 
+
+      style = FactoryBot.create :style, name: 'UserLager1', description: 'TODO'
+      beer1 = FactoryBot.create :beer, name: 'iso 3', style: style, brewery: brewery 
+
+      style = FactoryBot.create :style, name: 'UserLager2', description: 'TODO'
+      beer2 = FactoryBot.create :beer, name: 'Karhu', style: style, brewery: brewery 
+
+      style = FactoryBot.create :style, name: 'UserLager3', description: 'TODO'
+      beer3 = FactoryBot.create :beer, name: 'iso 4', style: style, brewery: brewery 
 
       user2 =  FactoryBot.create :user, username: 'Test1', password: 'Test1', password_confirmation: 'Test1'
 
@@ -77,19 +83,20 @@ describe "User" do
     it "shows the favorite style of the user" do
       sign_in(username: 'Pekka', password: 'Foobar1')
 
-      #save_and_open_page
-      expect(page).to have_content "favorite style\nIPA\n"
+      # save_and_open_page
+      expect(page).to have_content "favorite style\nUserLager2\n"
     end
 
     it "shows the favorite brewery of the user" do
       brewery = FactoryBot.create :brewery, name: 'NewBeer'
-      beer1 = FactoryBot.create :beer, name: 'new 1', style: 'NewLager', brewery: brewery 
+      style = FactoryBot.create :style, name: 'UserLager4', description: 'TODO'
+      beer1 = FactoryBot.create :beer, name: 'new 1', style: style, brewery: brewery 
       rating1 =  FactoryBot.create :rating, score: 45, beer: beer1, user: @user
 
       sign_in(username: 'Pekka', password: 'Foobar1')
 
       # save_and_open_page
-      expect(page).to have_content "favorite style\nNewLager\n"
+      expect(page).to have_content "favorite style\nUserLager4\n"
       expect(page).to have_content "favorite brewery\nNewBeer"
     end
   end

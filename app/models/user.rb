@@ -25,7 +25,7 @@ class User < ApplicationRecord
   def favorite_style
     avg = average_rating
     over_avg = ratings.select { |rating| rating.score >= avg }
-    over_avg.map { |k| k.beer.style }.uniq
+    over_avg.map { |k| k.beer.style.name }.uniq
   end
 
   def favorite_brewery

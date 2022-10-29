@@ -38,9 +38,14 @@ RSpec.describe User, type: :model do
     end
 
     it "and with two ratings, had the correct average rating" do
-      FactoryBot.create(:rating, score: 10, user: user)
-      FactoryBot.create(:rating, score: 20, user: user)
-      
+      style = FactoryBot.create(:style, name: 'Lager100')
+      beer = FactoryBot.create(:beer, style: style)
+      FactoryBot.create(:rating, score: 10, user: user, beer: beer)
+
+      style = FactoryBot.create(:style, name: 'Lager101')
+      beer = FactoryBot.create(:beer, style: style)
+      FactoryBot.create(:rating, score: 20, user: user, beer: beer)
+     
       expect(user.ratings.count).to eq(2)
       expect(user.average_rating).to eq(15.0)
     end
@@ -65,9 +70,18 @@ RSpec.describe User, type: :model do
     end
 
     it "is the one with highest rating if several rated" do
-      create_beer_with_rating({ user: user }, 10)
-      create_beer_with_rating({ user: user }, 7)
-      best = create_beer_with_rating({ user: user }, 25)
+      style = FactoryBot.create(:style, name: 'Lager200')
+      beer = FactoryBot.create(:beer, style: style)
+      FactoryBot.create(:rating, score: 7, user: user, beer: beer)
+
+      style = FactoryBot.create(:style, name: 'Lager201')
+      beer = FactoryBot.create(:beer, style: style)
+      FactoryBot.create(:rating, score: 10, user: user, beer: beer)
+
+
+      style = FactoryBot.create(:style, name: 'Lager202')
+      best = FactoryBot.create(:beer, style: style)
+      FactoryBot.create(:rating, score: 25, user: user, beer: best)
 
       expect(user.favorite_beer).to eq(best)
     end
@@ -79,18 +93,26 @@ RSpec.describe User, type: :model do
     it "has method for detemining one" do
       beer = create_beer_with_rating({ user: user }, 10)
 
-      expect(user.favorite_style.first).to eq(beer.style)
+      expect(user.favorite_style.first).to eq(beer.style.name)
     end
 
     it "can list multiple favorite styles that are over the average rating" do
-      beer1 = create_beer_with_rating_style({ user: user }, 10, "Lager")
-      beer2 = create_beer_with_rating_style({ user: user }, 11, "IPA")
-      beer3 = create_beer_with_rating_style({ user: user }, 12, "Pale Ale")
-      beer4 = create_beer_with_rating_style({ user: user }, 10, "IPA")
-      beer5 = create_beer_with_rating_style({ user: user }, 10, "Lager")
-      beer6 = create_beer_with_rating_style({ user: user }, 11, "IPA")
+      style = FactoryBot.create(:style, name: 'Lager1')
+      create_beer_with_rating_style({ user: user }, 10, { style: style })
 
-      expect(user.favorite_style).to eq(["IPA", "Pale Ale"])
+      style = FactoryBot.create(:style, name: 'Lager2')
+      create_beer_with_rating_style({ user: user }, 12, { style: style })
+
+      style = FactoryBot.create(:style, name: 'Lager3')
+      create_beer_with_rating_style({ user: user }, 10, { style: style })
+
+      style = FactoryBot.create(:style, name: 'Lager4')
+      create_beer_with_rating_style({ user: user }, 10, { style: style })
+
+      style = FactoryBot.create(:style, name: 'Lager5')
+      create_beer_with_rating_style({ user: user }, 12, { style: style })
+
+      expect(user.favorite_style).to eq(["Lager2", "Lager5"])
     end
   end
 
@@ -104,8 +126,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  def create_beer_with_rating_style(object, score, style)
-    beer = FactoryBot.create(:beer, style: style)
+  def create_beer_with_rating_style(object, score, object_style)
+    beer = FactoryBot.create(:beer, style: object_style[:style])
     FactoryBot.create(:rating, beer: beer, score: score, user: object[:user])
     beer
   end
@@ -121,7 +143,4 @@ RSpec.describe User, type: :model do
       create_beer_with_rating(object, score)
     end
   end
-
-  
-
 end

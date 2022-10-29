@@ -4,8 +4,10 @@ include Helpers
 
 describe "Rating" do
   let!(:brewery) { FactoryBot.create :brewery, name: 'Koff' }
-  let!(:beer1) { FactoryBot.create :beer, name: 'iso 3', brewery: brewery }
-  let!(:beer2) { FactoryBot.create :beer, name: 'Karhu', brewery: brewery }
+  let!(:style1) { FactoryBot.create :style, name: 'Lager1', description: 'TODO' }
+  let!(:style2) { FactoryBot.create :style, name: 'Lager2', description: 'TODO' }
+  let!(:beer1) { FactoryBot.create :beer, name: 'iso 3', brewery: brewery, style: style1 }
+  let!(:beer2) { FactoryBot.create :beer, name: 'Karhu', brewery: brewery, style: style2 }
   let!(:user) { FactoryBot.create :user }
 
   before :each do
