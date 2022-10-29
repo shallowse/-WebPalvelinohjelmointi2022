@@ -9,6 +9,9 @@ class BeerClubsController < ApplicationController
 
   # GET /beer_clubs/1 or /beer_clubs/1.json
   def show
+    if current_user
+      @is_member = @beer_club.members.find { |member| member.id == current_user.id } ? true : false
+    end
   end
 
   # GET /beer_clubs/new
