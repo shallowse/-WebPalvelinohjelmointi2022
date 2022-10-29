@@ -10,6 +10,11 @@
 <br><br>
 
 <% if @places %>
+  <% if @weather %>
+    <%= @weather.temperature%> Celsius<br><br>
+    <img src="<%= @weather.weather_icons.first %>"><br>
+    <strong>wind</strong>  <%= @weather.wind_speed%>, direction: <%= @weather.wind_dir %><br><br>
+  <% end %>
   <table>
     <thead>
       <% Place.rendered_fields.each do |field| %>
