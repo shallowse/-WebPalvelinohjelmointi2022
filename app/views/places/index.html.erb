@@ -15,24 +15,26 @@
     <img src="<%= @weather.weather_icons.first %>"><br>
     <strong>wind</strong>  <%= @weather.wind_speed%>, direction: <%= @weather.wind_dir %><br><br>
   <% end %>
-  <table>
+  <table class="table table-hover">
     <thead>
       <% Place.rendered_fields.each do |field| %>
-        <th><%= field %></th>
+        <th scope="col"><%= field %></th>
       <% end %>
     </thead>
-    <% @places.each do |place| %>
-      <tr>
-        <% id = nil %>
-        <% Place.rendered_fields.each do |field| %>
-          <% id = place.send(field) if field == :id%>
-          <% if field == :name %>
-            <td><%= link_to place.send(field), place_path(id) %></td>
-          <% else %>
-            <td><%= place.send(field) %></td>
+    <tbody>
+      <% @places.each do |place| %>
+        <tr scope="row">
+          <% id = nil %>
+          <% Place.rendered_fields.each do |field| %>
+            <% id = place.send(field) if field == :id%>
+            <% if field == :name %>
+              <td><%= link_to place.send(field), place_path(id) %></td>
+            <% else %>
+              <td><%= place.send(field) %></td>
+            <% end %>
           <% end %>
-        <% end %>
-      </tr>
+        </tr>
+    </tbody>
     <% end %>
   </table>
 <% end %>
