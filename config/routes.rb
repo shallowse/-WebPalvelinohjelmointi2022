@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     post "toggle_activity", on: :member
   end
 
-  resources :users
+  resources :users do
+    post "toggle_status", on: :member
+  end
 
   resources :ratings, only: [:index, :new, :create, :destroy]
 

@@ -4,6 +4,13 @@
   <% @users.each do |user| %>
     <h4><%= user.username %></h4>
     <p>
+
+    <div class="mb-2">
+      <% if !user.active %>
+        <span class="badge text-bg-primary">closed</span>
+      <% end %>
+    </div>
+    <p>
       <%= link_to "Show this user", user, class: 'link-info' %>
     </p>
   <% end %>

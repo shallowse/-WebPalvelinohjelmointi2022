@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :ensure_that_is_admin, only: %i[toggle_status]
 
   # GET /users or /users.json
   def index
@@ -22,6 +23,8 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.admin = false
+    @user.active = true
 
     respond_to do |format|
       if @user.save
@@ -63,6 +66,15 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :bad_request }
       end
     end
+  end
+
+  def toggle_status
+    user = User.find(params[:id])
+    user.update_attribute :active, !user.active
+
+    new_status = user.active ? 'activated' : 'closed'
+
+    redirect_to user_path(user.id), notice: "user #{user.username}'s status changed to #{new_status}"
   end
 
   private

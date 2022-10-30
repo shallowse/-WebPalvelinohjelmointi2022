@@ -27,8 +27,8 @@ b3.beers.create name: "Hefeweizen", style_id: 6
 b3.beers.create name: "Helles", style_id: 1
 
 # Create users
-u1 = User.create username: 'john', password: 'JOHN1', password_confirmation: 'JOHN1', admin: true
-u2 = User.create username: 'sarah', password:  'SARAH1', password_confirmation: 'SARAH1', admin: false
+u1 = User.create username: 'john', password: 'JOHN1', password_confirmation: 'JOHN1', admin: true, active: true
+u2 = User.create username: 'sarah', password:  'SARAH1', password_confirmation: 'SARAH1', admin: false, active: true
 
 # Create ratings
 u1_r1 = Rating.create score: 1, beer_id: b1.beers.first.id, user_id: u1.id

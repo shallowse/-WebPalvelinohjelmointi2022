@@ -4,6 +4,12 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
+
+    if !user.active
+      redirect_to(signin_path, notice: 'Your account is closed, please contact with admin')
+      return
+    end
+
     # https://ruby-doc.org/core-3.1.2/doc/syntax/calling_methods_rdoc.html#label-Safe+Navigation+Operator
     if user&.authenticate(params[:password])
       session[:user_id] = user.id

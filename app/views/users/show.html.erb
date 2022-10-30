@@ -1,12 +1,30 @@
 <div id="<%= dom_id @user %>">
 
   <h2>Username:</h2>
-  <p><%= @user.username %></p>
+  <p>
+    <%= @user.username %>
+    <% if @user.admin %>
+      <span class="badge bg-secondary">Admin</span>
+    <% end %>
+    <% if !@user.active %>
+      <span class="badge bg-primary">closed</span>
+    <% end %>
+  </p>
 
   <p>
     Has made <%= pluralize(@user.ratings.count, 'rating') %>,
      average rating <%= @user.average_rating %>
   </p>
+
+  <% if current_user && current_user.id != @user.id %>
+    <div class="mb-3">
+      <% text = @user.active ? 'Change account status' : 'Open account' %>
+      <%= link_to(text, 
+                  toggle_status_user_path(@user.id),
+                  data: { turbo_method: 'post' },
+                  class: 'btn btn-danger') %>
+    </div>
+  <% end %>
 
   <h3>member of</h3>
   <ul>
