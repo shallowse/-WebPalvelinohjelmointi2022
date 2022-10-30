@@ -13,12 +13,12 @@
     <%= form_with url: leaveclub_path, method: :delete do |form| %>
       <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
       <%= form.hidden_field :user_id, value: current_user.id %>
-      <%= form.submit 'End the membership' %>
+      <%= form.submit 'End the membership', class: 'btn btn-danger' %>
 
     <% end %>
   <% end %>
 
   <br>
-  <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club) %>
-  <%= button_to("Destroy this beer club", @beer_club, method: :delete) if current_user %>
+  <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club), class: 'btn btn-primary' %>
+  <%= button_to("Destroy this beer club", @beer_club, method: :delete, class: 'btn btn-danger') if current_user %>
 <% end %>

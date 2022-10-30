@@ -2,5 +2,5 @@
 
 <%= form_with url: joinclub_path, method: :post do |form| %>
   <%= form.select :beer_club_id, options_from_collection_for_select(@available_clubs, :id, :to_s) %>
-  <%= form.submit 'Join' %>
+  <%= form.submit 'Join', class: 'btn btn-primary' %>
 <% end %>
