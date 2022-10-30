@@ -23,7 +23,7 @@ describe "Beer" do
 
     # save_and_open_page
     expect(page).to have_content 'Beer was successfully created.'
-    expect(page).to have_content 'Name: iso 3'
+    expect(page).to have_content 'iso 3'
   end
 
   it "cannot be created with a non-valid name" do
@@ -36,6 +36,7 @@ describe "Beer" do
       click_button('Create Beer')
     }.to change{Beer.count}.by(0)
 
+    # save_and_open_page
     expect(page).to have_content '1 error prohibited this beer from being saved:'
     expect(page).to have_content 'Name can\'t be blank'
   end
