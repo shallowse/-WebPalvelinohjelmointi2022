@@ -33,4 +33,18 @@ class User < ApplicationRecord
     over_avg = ratings.select { |rating| rating.score >= avg }
     over_avg.map { |k| k.beer.brewery }.uniq
   end
+
+  def self.top(n)
+    return [] unless n > 0
+
+    collect = Array.new
+    User.all.each do |user|
+      collect.append(OpenStruct.new(
+        name: user.username,
+        ratings: user.ratings.count))
+    end
+
+    collect.sort_by { |a| -a.ratings }
+    collect[0...n]
+  end
 end

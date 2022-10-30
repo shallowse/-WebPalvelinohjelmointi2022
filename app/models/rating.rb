@@ -6,7 +6,17 @@ class Rating < ApplicationRecord
                                     less_than_or_equal_to: 50,
                                     only_integer: true }
 
+  scope :recent, -> { order(created_at: :desc).limit(5) }
+
   def to_s
     "#{beer.name} #{score}"
+  end
+
+  def self.recent_ratings
+    r = recent.map do |obj|
+      OpenStruct.new(
+        name: obj.to_s,
+        time: obj.updated_at)
+    end
   end
 end
