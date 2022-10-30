@@ -31,9 +31,10 @@ class Beer < ApplicationRecord
     "#{name}: #{brewery.name}"
   end
 
-  def self.top(n)
-    return [] unless n > 0
+  def self.top(num)
+    return [] unless num > 0
+
     top_sorted = Beer.all.sort_by { |a| -a.average_rating }
-    top_sorted[0...n]
+    top_sorted[0...num]
   end
 end

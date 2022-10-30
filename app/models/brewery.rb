@@ -38,24 +38,23 @@ class Brewery < ApplicationRecord
 
   # TODO: refactor
   # Uses sames code as model/style
-  def self.top(n)
-    return [] unless n > 0
+  def self.top(num)
+    return [] unless num > 0
 
-    collect = Array.new
+    collect = []
     Brewery.all.each do |brewery|
-
-      avg_sum = Array.new
+      avg_sum = []
       brewery.beers.each do |beer|
-        avg_sum.append(beer.average_rating) 
+        avg_sum.append(beer.average_rating)
       end
 
-      # In case the brewery does not have any beers 
+      # In case the brewery does not have any beers
       avg_sum = [0] if avg_sum.empty?
 
-      collect.append(OpenStruct.new name: brewery.name, rating: (avg_sum.sum.to_f / avg_sum.count).round(1))
+      collect.append(OpenStruct.new(name: brewery.name, rating: (avg_sum.sum.to_f / avg_sum.count).round(1)))
     end
 
-    collect.sort_by { |a| -a.rating }
-    collect[0...n]
+    collect.sort_by! { |a| -a.rating }
+    collect[0...num]
   end
 end

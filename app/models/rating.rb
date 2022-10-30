@@ -13,10 +13,11 @@ class Rating < ApplicationRecord
   end
 
   def self.recent_ratings
-    r = recent.map do |obj|
+    recent.map do |obj|
       OpenStruct.new(
         name: obj.to_s,
-        time: obj.updated_at)
+        time: obj.updated_at
+      )
     end
   end
 end

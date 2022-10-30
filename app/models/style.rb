@@ -10,25 +10,23 @@ class Style < ApplicationRecord
 
   # TODO: refactor
   # Uses same code as model/brewery.rb
-  def self.top(n)
-    return [] unless n > 0
+  def self.top(num)
+    return [] unless num > 0
 
-    collect = Array.new
+    collect = []
     Style.all.each do |style|
-
-      avg_sum_per_style = Array.new
+      avg_sum_per_style = []
       style.beers.each do |beer|
-        avg_sum_per_style.append(beer.average_rating) 
+        avg_sum_per_style.append(beer.average_rating)
       end
 
       avg_sum_per_style = [0] if avg_sum_per_style.empty?
 
-      collect.append(OpenStruct.new(
-                  name: style.name, 
-                  rating: (avg_sum_per_style.sum.to_f / avg_sum_per_style.count).to_i))
+      collect.append(OpenStruct.new(name: style.name,
+                                    rating: (avg_sum_per_style.sum.to_f / avg_sum_per_style.count).to_i))
     end
 
-    collect.sort_by { |a| -a.rating }
-    collect[0...n]
+    collect.sort_by! { |a| -a.rating }
+    collect[0...num]
   end
 end
