@@ -16,7 +16,7 @@
           <% Beer.top(3).each do |beer| %>
             <tr>
               <td><%= beer.name %></td>
-              <td><%= beer.average_rating %></td>
+              <td><%= round_helper(beer.average_rating) %></td>
             </tr>
           <%end %>
         </tbody>
@@ -36,7 +36,7 @@
             <% Brewery.top(3).each do |brewery| %>
               <tr>
                 <td><%= brewery.name %></td>
-                <td><%= brewery.rating %></td>
+                <td><%= round_helper(brewery.rating) %></td>
               </tr>
             <%end %>
           </tbody>
@@ -56,7 +56,7 @@
             <% Style.top(3).each do |style| %>
               <tr>
                 <td><%= style.name %></td>
-                <td><%= style.rating %></td>
+                <td><%= round_helper(style.rating) %></td>
               </tr>
             <%end %>
           </tbody>

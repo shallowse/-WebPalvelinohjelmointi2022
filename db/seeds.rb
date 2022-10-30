@@ -5,9 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-b1 = Brewery.create name: "Koff", year: 1897
-b2 = Brewery.create name: "Malmgard", year: 2001
-b3 = Brewery.create name: "Weihenstephaner", year: 1040
+b1 = Brewery.create name: "Koff", year: 1897, active: true
+b2 = Brewery.create name: "Malmgard", year: 2001, active: true
+b3 = Brewery.create name: "Weihenstephaner", year: 1040, active: true
+b4 = Brewery.create name: "Turun panimo", year: 2010, active: false
 
 # styles from: https://www.beeradvocate.com/beer/styles/
 Style.create name: 'European Dark Lager', description: 'This style encompasses a wide range of dark beers including India Pale Lagers, Czech lagers, and lagers brewed with adjuncts or non-traditional ingredients. In time these entries will be moved into more accurate categories.'

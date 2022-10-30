@@ -1,7 +1,6 @@
 <%= render @beer_club %>
 
 <% if current_user %>
-
   <% if !@is_member %>
     <h4>join this club</h4>
     <%= form_with url: joinclub_path, method: :post do |form| %>
@@ -17,8 +16,7 @@
 
     <% end %>
   <% end %>
-
-  <br>
-  <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club), class: 'btn btn-primary' %>
-  <%= button_to("Destroy this beer club", @beer_club, method: :delete, class: 'btn btn-danger') if current_user %>
 <% end %>
+
+<br>
+<%= edit_and_destroy_buttons(@beer_club) %>

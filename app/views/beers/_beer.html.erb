@@ -18,6 +18,6 @@
     Beer has not yet been rated!
   <% else %>
     Beer has <%= pluralize(beer.ratings.count, "rating") %> 
-    with an average of <%= beer.average_rating.to_f %> 
+    with an average of <%= round_helper(beer.average_rating.to_f) %> 
   <% end %>
 </div>
