@@ -1,7 +1,5 @@
 <h1>Beer places search</h1>
 
-<p id="notice" style="color: red"><%= notice %></p>
-
 <%= form_with url: places_path, method: :post do |form|%>
   city: <%= form.text_field :city %>
   <%= form.submit 'Search', class: 'btn btn-primary' %>
@@ -11,6 +9,7 @@
 
 <% if @places %>
   <% if @weather %>
+    <h4>The current weather in <%= @city %></h2>
     <%= @weather.temperature%> Celsius<br><br>
     <img src="<%= @weather.weather_icons.first %>"><br>
     <strong>wind</strong>  <%= @weather.wind_speed%>, direction: <%= @weather.wind_dir %><br><br>
