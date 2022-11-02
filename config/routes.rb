@@ -40,4 +40,6 @@ Rails.application.routes.draw do
   resources :styles
 
   get 'beerlist', to: 'beers#list'
+
+  get 'brewerylist', to: 'breweries#list'
 end
