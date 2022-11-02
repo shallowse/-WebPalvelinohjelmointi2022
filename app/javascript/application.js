@@ -5,3 +5,7 @@
 
 import "@hotwired/turbo-rails"
 import "controllers"
+
+import { beers } from 'custom/utils';
+
+beers();

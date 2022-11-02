@@ -38,4 +38,6 @@ Rails.application.routes.draw do
   post 'places', to: 'places#search'
 
   resources :styles
+
+  get 'beerlist', to: 'beers#list'
 end

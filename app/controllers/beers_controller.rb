@@ -1,5 +1,5 @@
 class BeersController < ApplicationController
-  before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_signed_in, except: %i[index show list]
   before_action :ensure_that_is_admin, only: %i[destroy]
   before_action :set_beer, only: %i[show edit update destroy]
   before_action :set_breweries_and_styles_for_template, only: %i[new edit create]
@@ -73,6 +73,10 @@ class BeersController < ApplicationController
       format.html { redirect_to beers_url, notice: "Beer was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # GET /beerlist
+  def list
   end
 
   private
