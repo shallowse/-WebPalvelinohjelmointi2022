@@ -52,7 +52,7 @@ BREWERIES.sortBy = how => {
 };
 
 const breweries = () => {
-  if (document.querySelectorAll('#breweryable').length < 1 ) return;
+  if (document.querySelectorAll('#brewerytable').length < 1 ) return;
 
   document.getElementById("name").addEventListener("click", (e) => {
     e.preventDefault;
