@@ -3,6 +3,7 @@ class BeersController < ApplicationController
   before_action :ensure_that_is_admin, only: %i[destroy]
   before_action :set_beer, only: %i[show edit update destroy]
   before_action :set_breweries_and_styles_for_template, only: %i[new edit create]
+  before_action :expire_brewerylist_fragment_cache, only: %i[create update destroy]
 
   # GET /beers or /beers.json
   def index

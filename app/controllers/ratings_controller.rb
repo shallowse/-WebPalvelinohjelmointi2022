@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :expire_brewerylist_fragment_cache, only: %i[create destroy]
+
   def index
     @ratings = Rating.all
   end

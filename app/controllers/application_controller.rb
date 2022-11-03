@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_is_admin
     redirect_to root_path, notice: 'delete is allowed only for an admin' if current_user && !current_user.admin
   end
+
+  def expire_brewerylist_fragment_cache
+    expire_fragment('brewerylist')
+  end
 end
