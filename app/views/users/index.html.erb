@@ -2,13 +2,18 @@
 
 <div id="users">
   <% @users.each do |user| %>
-    <p>
-      <%= link_to(user.username, user) %>
+  <div class="card mb-4">
+    <div class="card-body">
+      <p><%= link_to(user.username, user) %></p>
       <p>Has made <%= "#{user.ratings.size}"%> ratings, average rating <%= "#{user.average_rating}" %></p>
+      <% if user.favorite_beer %>
+        <p>Favorite beer: <%= "#{user.favorite_beer.name}" %></p>
+      <% end %>
       <% if !user.active? %>
         <span class="badge text-bg-danger">account closed</span>
       <% end %>
-    </p>
+      </div>
+  </div>
   <% end %>
 </div>
 
