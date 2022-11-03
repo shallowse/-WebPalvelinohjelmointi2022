@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
   def expire_brewerylist_fragment_cache
     expire_fragment('brewerylist')
   end
+
+  def expire_beerlist_fragment_cache
+    %w[beerlist-name beerlist-brewery beerlist-style beerlist-rating].each { |f| expire_fragment(f) }
+  end
 end
