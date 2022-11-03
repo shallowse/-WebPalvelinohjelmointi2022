@@ -7,6 +7,7 @@ module RatingAverage
     return 0 if rating_count == 0
 
     # ratings.average(:score).round(2)
-    ratings.map(&:score).sum.to_f / rating_count
+    avg = ratings.map(&:score).sum.to_f / rating_count
+    avg.round(2)
   end
 end
