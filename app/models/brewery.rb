@@ -1,6 +1,7 @@
 class Brewery < ApplicationRecord
   include ActiveModel::Validations
   include RatingAverage
+  extend TopRating
 
   validates :name, presence: true
   validate :prohibited_year_range
@@ -34,27 +35,5 @@ class Brewery < ApplicationRecord
     errors.add(:year, "must be greater than 1040 ") if year.to_i < 1040
 
     errors.add(:year, "must be less than #{Time.now.year}") if year.to_i > Time.now.year
-  end
-
-  # TODO: refactor
-  # Uses sames code as model/style
-  def self.top(num)
-    return [] unless num > 0
-
-    collect = []
-    Brewery.all.each do |brewery|
-      avg_sum = []
-      brewery.beers.each do |beer|
-        avg_sum.append(beer.average_rating)
-      end
-
-      # In case the brewery does not have any beers
-      avg_sum = [0] if avg_sum.empty?
-
-      collect.append(OpenStruct.new(name: brewery.name, rating: (avg_sum.sum.to_f / avg_sum.count).round(1)))
-    end
-
-    collect.sort_by! { |a| -a.rating }
-    collect[0...num]
   end
 end

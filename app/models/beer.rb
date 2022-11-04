@@ -31,6 +31,7 @@ class Beer < ApplicationRecord
     "#{name}: #{brewery.name}"
   end
 
+  # vk7/tehtävä13: ks. kommentti app/models/concers/top_rating.rb
   def self.top(num)
     return [] unless num > 0
 
