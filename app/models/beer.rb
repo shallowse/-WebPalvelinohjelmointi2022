@@ -28,7 +28,7 @@ class Beer < ApplicationRecord
   end
 
   def to_s
-    "#{name}: #{brewery.name}"
+    name.to_s
   end
 
   # vk7/tehtävä13: ks. kommentti app/models/concers/top_rating.rb

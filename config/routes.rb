@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
-  resources :beer_clubs, path: :beerclubs
+  resources :beer_clubs, path: :beerclubs do
+    post 'confirm_applicant', on: :member
+  end
 
   get 'joinclub', to: 'joinclubs#new'
   post 'joinclub', to: 'joinclubs#create'

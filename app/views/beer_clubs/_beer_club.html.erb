@@ -1,8 +1,5 @@
 <div id="<%= dom_id beer_club %>">
-  <p>
-    <strong>Name:</strong>
-    <%= beer_club.name %>
-  </p>
+  <h2><%= beer_club.name %></h2>
 
   <p>
     <strong>Founded:</strong>
@@ -14,12 +11,30 @@
     <%= beer_club.city %>
   </p>
 
-  <p>
-    <strong>members</strong>
-  </p>
+  <h4>members</h4>
+  <ul>
+    <% beer_club.confirmed_members.each do |member| %>
+      <li><%= link_to member.user.username, user_path(member.user.id) %></li>
+    <% end %>
+  </ul>
 
-  <% beer_club.members.each do |user| %>
-    <p><%= link_to user.username, user_path(user.id) %></p>
-  <% end %>
+  <h4>membership applications</h4>
+  <table class="table">
+    <tbody>
+      <% beer_club.not_confirmed_members.each do |member| %>
+        <tr>
+          <td><%= link_to member.user.username, user_path(member.user.id) %></td>
+          <td>
+            <% if @is_confirmed_member %>
+              <%= form_with url: confirm_applicant_beer_club_path do |form| %>
+                <%= form.hidden_field :user_id, value: member.user.id %>
+                <%= form.submit 'confirm', class: 'btn btn-primary btn-sm' %>
+                <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </div>

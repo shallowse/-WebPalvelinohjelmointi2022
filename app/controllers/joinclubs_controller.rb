@@ -34,7 +34,7 @@ class JoinclubsController < ApplicationController
     beer_club.members << user unless is_member
 
     # redirect_to user_path(user.id)
-    redirect_to beer_club_path(beer_club), notice: "#{user.username} Welcome to the club."
+    redirect_to beer_club_path(beer_club), notice: "#{user.username} Your confirmation to the club is pending."
   end
 
   def leave

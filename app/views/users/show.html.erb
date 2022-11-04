@@ -29,13 +29,25 @@
   <h3>member of</h3>
   <table class="table table-hover table-striped">
     <tbody>
-      <% @user.beer_clubs.each do |beer_club| %>
+      <% @user.confirmed_memberships.each do |cc| %>
         <tr>
-          <td><%= link_to beer_club.name, beer_club_path(beer_club.id) %></td>
+          <td><%= link_to cc.beer_club.name, beer_club_path(cc.beer_club.id) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <h3>applied membership of</h3>
+  <table class="table table-hover table-striped">
+    <tbody>
+      <% @user.not_confirmed_memberships.each do |nc| %>
+        <tr>
+          <td><%= link_to nc.beer_club.name, beer_club_path(nc.beer_club.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 
   <h3>ratings</h3>
 

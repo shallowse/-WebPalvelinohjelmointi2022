@@ -24,6 +24,7 @@ class BeerClubsController < ApplicationController
     return unless current_user
 
     @is_member = @beer_club.members.find { |member| member.id == current_user.id } ? true : false
+    @is_confirmed_member = @beer_club.memberships.find_by(user_id: current_user.id)&.confirmed ? true : false
   end
 
   # GET /beer_clubs/new
@@ -41,6 +42,14 @@ class BeerClubsController < ApplicationController
 
     respond_to do |format|
       if @beer_club.save
+        # vk7/tehtävä 6-8 Kun kerho luodaan, tee sen luoneesta käyttäjästä automaattisesti kerhon jäsen
+        bc = BeerClub.find_by name: params[:beer_club][:name]
+        bc.members << current_user
+        # bc.memberships.first.confirmed = true
+        m = bc.memberships.find_by user_id: current_user.id
+        m.confirmed = true
+        m.save
+
         format.html { redirect_to beer_club_url(@beer_club), notice: "Beer club was successfully created." }
         format.json { render :show, status: :created, location: @beer_club }
       else
@@ -70,6 +79,24 @@ class BeerClubsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to beer_clubs_url, notice: "Beer club was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def confirm_applicant
+    permitted_params = params.permit(:user_id, :id)
+    uid = permitted_params[:user_id]
+    bcid = permitted_params[:id]
+    beer_club = BeerClub.find(bcid)
+    approver_is_member = beer_club.members.find { |member| member.id == current_user.id } ? true : false
+    applicant_is_confirmed_member = beer_club.memberships.find_by(user_id: uid)&.confirmed ? true : false
+
+    if approver_is_member && !applicant_is_confirmed_member
+      membership = Membership.find_by(user_id: uid, beer_club_id: bcid)
+      membership.update_attribute(:confirmed, true)
+      user = User.find(uid)
+      redirect_to beer_club_url(beer_club), notice: "#{user.username} accepted as member"
+    else
+      redirect_to beer_club_url(beer_club), notice: "You do not have permission to accept members"
     end
   end
 

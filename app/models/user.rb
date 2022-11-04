@@ -35,6 +35,14 @@ class User < ApplicationRecord
     over_avg.map { |k| k.beer.brewery }.uniq
   end
 
+  def confirmed_memberships
+    memberships.where(confirmed: true)
+  end
+
+  def not_confirmed_memberships
+    memberships.where(confirmed: [nil, false])
+  end
+
   # vk7/tehtävä13: ks. kommentti app/models/concers/top_rating.rb
   def self.top(num)
     return [] unless num > 0
