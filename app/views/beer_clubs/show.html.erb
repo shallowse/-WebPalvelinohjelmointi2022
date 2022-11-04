@@ -19,4 +19,6 @@
 <% end %>
 
 <br>
-<%= edit_and_destroy_buttons(@beer_club) %>
+<% if current_user && current_user.admin %>
+  <%= edit_and_destroy_buttons(@beer_club) %>
+<% end %>
