@@ -8,7 +8,10 @@ describe "Beerlist page" do
     end
 
     Capybara.javascript_driver = :chrome
-    WebMock.disable_net_connect!(allow_localhost: true)
+    # WebMock.disable_net_connect!(allow_localhost: true)
+    # Nämä testit eivät github actionsissa enää jossain vaiheessa toimineet ilman ao. muutosta
+    # https://stackoverflow.com/a/22976546
+    WebMock.allow_net_connect!
   end
 
   before :each do
