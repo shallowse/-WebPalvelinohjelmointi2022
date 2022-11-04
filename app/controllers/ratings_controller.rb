@@ -2,6 +2,8 @@ class RatingsController < ApplicationController
   before_action :expire_brewerylist_fragment_cache, only: %i[create destroy]
   before_action :expire_beerlist_fragment_cache, only: %i[create destroy]
 
+  # vk7/tehtävä12: ratkaisuna eventual consistensy
+  # https://github.com/mluukkai/WebPalvelinohjelmointi2022/blob/main/web/viikko7.md#eventual-consistency
   def index
     @ratings = Rating.all
   end
