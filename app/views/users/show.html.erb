@@ -27,54 +27,66 @@
   <% end %>
 
   <h3>member of</h3>
-  <ul>
-    <% @user.beer_clubs.each do |beer_club| %>
-      <li>
-        <%= link_to beer_club.name, beer_club_path(beer_club.id) %>
-      </li>
-    <% end %>
-  </ul>
+  <table class="table table-hover table-striped">
+    <tbody>
+      <% @user.beer_clubs.each do |beer_club| %>
+        <tr>
+          <td><%= link_to beer_club.name, beer_club_path(beer_club.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <h3>ratings</h3>
-  <ul>
-    <% @user.ratings.each do |rating| %>
-      <li>
-        <%= rating.to_s %>
-        <% if @user == current_user %>
-        <%= link_to 'Delete', rating_path(rating.id),
-                        data: {
-                          'turbo_method': :delete,
-                          'turbo_confirm': 'Are you sure?'
-                          },
-                        class: 'link-danger' %>
+
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="cil">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.ratings.each do |rating| %>
+        <tr>
+          <td><%= rating.to_s %></td>
+          <% if @user == current_user %>
+            <td>
+              <%= link_to 'Delete', rating_path(rating.id),
+                                    data: {
+                                    'turbo_method': :delete,
+                                    'turbo_confirm': 'Are you sure?'
+                                    },
+                                    class: 'link-danger' %>
+            </td>
+        </tr>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
+      <% end %>
+    </tbody>
+  </table>
 
   <h3>favorite style<%= "s" if @user.favorite_style.count > 1 %></h3>
-  <ul>
-    <% @user.favorite_style.each do |favorite| %>
-      <li><%= favorite %></li>
-    <% end %>
-  </ul>
+  <table class="table table-hover">
+    <tbody>
+      <% @user.favorite_style.each do |favorite| %>
+        <tr>
+          <td><%= favorite %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <h3>favorite <%= @user.favorite_brewery.count == 1 ? "brewery" : "breweries" %></h3>
-  <ul>
-    <% @user.favorite_brewery.each do |favorite| %>
-      <li><%= favorite.name %></li>
-    <% end %>
-  </ul>
+  <table class="table table-hover">
+    <tbody>
+      <% @user.favorite_brewery.each do |favorite| %>
+        <tr>
+          <td><%= favorite.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </div>
 
-<div>
-  <% if @user == current_user %>
-    <%= link_to "Edit this user", edit_user_path(@user) %>
-  <% end %>
-  <%= link_to "Back to users", users_path %>
-
-  <% if @user == current_user %>
-    <%= button_to "Destroy this user", @user, method: :delete, class: 'btn btn-danger' %>
-  <% end %>
-</div>
+<%= edit_and_destroy_buttons(@user) %>
